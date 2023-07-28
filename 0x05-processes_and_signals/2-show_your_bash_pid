@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=SC2009
+
+# List all processes, show process hierarchy, and use 'grep' to filter lines containing the word 'bash'.
+# The third line above disables the SC2009 warning from shellcheck about using 'ps aux | grep'.
+# We can ignore the warning as this is a simple use case without any security concerns.
+
+ps -eo pid,ppid,user,%cpu,%mem,cmd --forest | grep -w "bash"
