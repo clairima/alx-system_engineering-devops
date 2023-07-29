@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
-# displays a list of currently running processes
-ps -eo pid,ppid,user,%cpu,%mem,cmd --forest
+
+# Get the PID of the current script
+script_pid=$$
+
+echo "PID   Command"
+echo "------------"
+
+# Use 'ps' command to list processes containing the word 'bash'
+# Format the output to display PID and the process command.
+ps -eo pid,cmd | grep "bash" | grep -v "grep" | grep -v "$script_pid" | awk '{print $1, $NF}'
