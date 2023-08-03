@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Function to display listening ports
+function display_listening_ports {
+    echo "Active Internet connections (only servers)"
+    echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+    lsof -i -n -P | awk 'NR > 2 {print $1 " " $2 " " $4 " " $5 " " $6 " " $7}' | column -t
+    echo ""
+    echo "Active UNIX domain sockets (only servers)"
+    echo "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path"
+     lsof -U | awk 'NR > 2 {print $1 " " $2 " " $3 " " $4 " " $5 " " $6 " " $7}' | column -t
+}
+
+display_listening_ports
