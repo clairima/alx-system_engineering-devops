@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Write a Bash script that configures an Ubuntu server
-# Backup the original hosts file
 sudo cp /etc/hosts /etc/hosts_backup
 
 # Modify the hosts file
@@ -9,5 +8,3 @@ sudo sed -i 's/157.240.11.35/8.8.8.8/g' /etc/hosts
 
 # Flush DNS cache
 sudo service systemd-resolved restart
-
-echo "Your Ubuntu server has been configured. The changes will take effect now."
