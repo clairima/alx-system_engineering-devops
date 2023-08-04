@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# Write a Bash script that configures an Ubuntu server
 # Backup the original hosts file
 sudo cp /etc/hosts /etc/hosts_backup
 
