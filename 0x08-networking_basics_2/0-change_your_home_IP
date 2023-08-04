@@ -5,6 +5,3 @@ sudo cp /etc/hosts /etc/hosts_backup
 # Modify the hosts file
 sudo sed -i 's/127.0.0.1/127.0.0.2/g' /etc/hosts
 sudo sed -i 's/157.240.11.35/8.8.8.8/g' /etc/hosts
-
-# Flush DNS cache
-sudo service systemd-resolved restart
