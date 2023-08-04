@@ -1,2 +1,22 @@
 #!/usr/bin/env bash
 # Bash script that displays listening ports
+
+function display_listening_ports {
+    echo "Active Internet connections (only servers)"
+    echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+    netstat -tlnp | awk 'NR > 2 {print $1 " " $5 " " $7}' | while read proto recvq sendq local_address foreign_address state pid_program
+    do
+        program_name=$(ps -p "$pid_program" -o comm=)
+        echo "$proto $recvq $sendq $local_address $foreign_address $state $pid_program/$program_name"
+    done | column -t
+    echo ""
+    echo "Active UNIX domain sockets (only servers)"
+    echo "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path"
+    netstat -ulnp | awk 'NR > 2 {print $1 " " $5 " " $6}' | while read proto refcnt flags type state inode pid_program
+    do
+        program_name=$(ps -p "$pid_program" -o comm=)
+        echo "$proto $refcnt $flags $type $state $inode $pid_program/$program_name"
+    done | column -t
+}
+
+display_listening_ports
