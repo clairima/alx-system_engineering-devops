@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Bash script creates an RSA key pair.
+
+private_key_name="school"
+
+key_bits="4096"
+
+passphrase="betty"
+
+ssh-keygen -t rsa -b "$key_bits" -f "$private_key_name" -N "$passphrase"
+
+echo "RSA key pair generated and saved as '$private_key_name' and '$private_key_name.pub'"
