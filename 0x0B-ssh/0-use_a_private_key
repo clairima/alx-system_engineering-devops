@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #Bash script that uses ssh to connect to the server using the private key
 
 server_ip="8.8.8.8"
