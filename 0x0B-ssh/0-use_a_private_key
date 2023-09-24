@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+#Bash script that uses ssh to connect to the server using the private key
+
+server_ip="8.8.8.8"
+
+private_key="~/.ssh/school"
+
+ssh_user="ubuntu"
+
+ssh -i "$private_key" "$ssh_user@$server_ip"
+
