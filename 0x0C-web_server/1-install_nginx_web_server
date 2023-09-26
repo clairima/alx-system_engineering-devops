@@ -1,22 +1,8 @@
 #!/usr/bin/env bash
-# a Bash script that configures a new Ubuntu machine
+# installs nginx and configure it to listen on port 80
 
-# Update package lists and install Nginx
-apt-get update
-apt-get -y install nginx
-
-# Create a basic HTML file with "Hello World!"
-echo "Hello World!" > /var/www/html/index.html
-
-# Check if Nginx is running
-if ps aux | grep -q '[n]ginx'; then
-    # Restart Nginx without using systemctl
-    kill -s HUP $(pgrep nginx)
-else
-    # If Nginx isn't running, start it
-    /usr/sbin/nginx
-fi
-
-sed -i '/listen 80 default_server;/c\listen 80;' /etc/nginx/sites-available/default
-
-kill -s HUP $(pgrep nginx)
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo sh -c 'echo 'Hello World!' > /var/www/html/index.nginx.html'
+sudo service nginx start
