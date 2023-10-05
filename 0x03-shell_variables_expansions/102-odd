@@ -1,2 +1,2 @@
 #!/bin/bash
-paste -d,- - | cut -d, -f1
+echo 'input text' | tr 'a-zA-Z' 'n-za-mN-ZA-M' | tr 'n-za-mN-ZA-M' 'a-zA-Z'
