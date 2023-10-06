@@ -2,7 +2,7 @@
 # SSH client configuration use the private key and must be configured to refuse to authenticate using a password
 
 Host 352375-web-01
-HostName 54.236.162.72
+HostName 107.20.109.173
 User ubuntu
 IdentityFile ~/.ssh/school
 PasswordAuthentication no
