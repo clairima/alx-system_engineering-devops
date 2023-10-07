@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Function to display subdomain information using dig
+display_subdomain_info() {
+    local domain=$1
+    local subdomain=$2
+    local record_type="A"
+
+    if [[ -n $subdomain ]]; then
+        subdomain="$subdomain.$domain"
+    else
+        subdomain="www.$domain lb-01.$domain web-01.$domain web-02.$domain"
+    fi
+
+    for sub in $subdomain; do
+        destination=$(dig +short $sub)
+        if [[ -z $destination ]]; then
+            echo "No IP address found for $sub"
+        else
+            echo "The subdomain $sub is a $record_type record and points to $destination"
+        fi
+    done
+}
+
+if [[ $# -lt 1 ]]; then
+    echo "Error: Missing domain parameter"
+    exit 1
+fi
+
+domain=$1
+subdomain=$2
+
+display_subdomain_info $domain $subdomain
+
+
+
+
+
