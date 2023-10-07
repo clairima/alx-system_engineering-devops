@@ -1,33 +1,15 @@
 #!/usr/bin/env bash
-# Function to display subdomain information using dig
-display_subdomain_info() {
-    local domain=$1
-    local subdomain=$2
-    local record_type="A"
-
-    if [[ -n $subdomain ]]; then
-        subdomain="$subdomain.$domain"
-    else
-        subdomain="www lb-01 web-01 web-02"
-    fi
-
-    for sub in $subdomain; do
-        destination=$(dig +short $sub.$domain)
-        if [[ -z $destination ]]; then
-            echo "The subdomain $sub does not have a valid IP address"
-        else
-            echo "The subdomain $sub is a $record_type record and points to $destination"
-        fi
-    done
+# display subdomain information using dig
+print_info () {
+    dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
 }
 
-# Main script logic
-if [[ $# -lt 1 ]]; then
-    echo "Error: Missing domain parameter"
-    exit 1
+if [ "$#" -eq 2 ]
+then
+    print_info "$2.$1" "$2"
+else
+    print_info "www.$1" "www"
+    print_info "lb-01.$1" "lb-01"
+    print_info "web-01.$1" "web-01"
+    print_info "web-02.$1" "web-02"
 fi
-
-domain=$1
-subdomain=$2
-
-display_subdomain_info $domain $subdomain
