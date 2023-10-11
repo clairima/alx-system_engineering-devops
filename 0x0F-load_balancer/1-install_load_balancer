@@ -3,14 +3,14 @@
 
 balancer="\
 frontend haproxy_balancer
-    bind *:80
+    bind *:8080
     mode http
     default_backend webservers
     
 backend webservers
     balance roundrobin
-    server 26071-web-01 107.20.109.173:80 check
-    server 26071-web-02 34.203.77.65:80 check"
+    server 352375-web-01 52.206.20.95:80 check
+    server 352375-web-02 54.86.169.176:80 check"
 
 apt-get -y update
 apt-get -y upgrade
